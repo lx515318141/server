@@ -1,0 +1,47 @@
+<title>首页</title>
+<link rel="stylesheet" href="./style.css">
+
+<h5>您的余额是<span id="amount">&&&amount&&&</span></h5>
+<button id="button">打钱</button>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/core.js"></script>
+<script>
+    button.addEventListener('click', (e) => {
+        $.ajax({
+            // 虽然写作ajax，但是其实和ajax一点关系都没有，
+            url: "/pay",
+            // 填写路径
+            dataType: "jsonp",
+            // 写明需要使用JSONP
+            success: function (response) {
+                // 如果成功了需要怎么做
+                if (response === 'success') {
+                    amount.innerText = amount.innerText - 1
+                }
+            }
+        })
+
+
+
+        //下面是自己写的JSONP，上面是用JQuery写的JSONP，两者等价
+        // let script = document.createElement('script')
+        // let functionName = 'frank' + parseInt(Math.random() * 100000, 10)
+        // Math.random（）返回的是0~1之间的随机小数，包括0，不包括1。*100000后就是0~100000之间的小数。
+        // parseInt用来取整数部分，最后的10表示十进制
+        // window[functionName] = function (result) {
+        //     if (result === 'success') {
+        //         amount.innerText = amount.innerText - 1
+        //     } else {
+
+        //     }
+        // }
+        // script.src = '/pay?callback=' + functionName
+        // document.body.appendChild(script)
+        // script.onload = function (e) {
+        //     e.currentTarget.remove()
+        // }
+        // script.onerror = function (e) {
+        //     alert('fail')
+        //     e.currentTarget.remove()
+        // }
+    })
+</script>
